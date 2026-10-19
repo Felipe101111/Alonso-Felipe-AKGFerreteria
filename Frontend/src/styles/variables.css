@@ -1,0 +1,17 @@
+:root {
+  --color-principal: #2c2c2c;
+  --color-secundario: #f5f4f2;
+  --color-acento: #e85d24;
+  --color-acento-hover: #c94c18;
+  --color-borde: #d8d6d2;
+  --color-exito: #2e7d32;
+  --color-error: #c62828;
+  --color-info: #1565c0;
+
+  --font-titulo: "Oswald", sans-serif;
+  --font-cuerpo: "Lato", sans-serif;
+
+  --radius: 6px;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  --transition: 0.2s ease-in-out;
+}

@@ -1,0 +1,29 @@
+.catalogo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 3rem;
+}
+
+.catalogo__filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.catalogo__filtros .form-field {
+  min-width: 220px;
+  flex: 1;
+}
+
+.catalogo__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.catalogo__vacio {
+  text-align: center;
+  padding: 2rem;
+}

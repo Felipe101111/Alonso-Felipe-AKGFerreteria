@@ -1,0 +1,28 @@
+.auth {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.auth__form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.auth__submit {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.auth__alt {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.auth__alt a {
+  color: var(--color-acento);
+  font-weight: 700;
+}

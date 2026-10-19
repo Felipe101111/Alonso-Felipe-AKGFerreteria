@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="Imagen no disponible">
+  <rect width="400" height="300" fill="#d9d9d9" />
+  <line x1="0" y1="0" x2="400" y2="300" stroke="#9a9a9a" stroke-width="2" />
+  <line x1="400" y1="0" x2="0" y2="300" stroke="#9a9a9a" stroke-width="2" />
+</svg>

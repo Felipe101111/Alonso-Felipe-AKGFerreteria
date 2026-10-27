@@ -9,4 +9,6 @@ const create = (datos) => request("/pedidos", { method: "POST", body: datos, aut
 const cambiarEstado = (id, estado) =>
   request(`/pedidos/${id}/estado`, { method: "PATCH", body: { estado }, auth: true });
 
-export default { getByCliente, getAll, create, cambiarEstado };
+const cancelar = (id) => request(`/pedidos/${id}/cancelar`, { method: "PATCH", auth: true });
+
+export default { getByCliente, getAll, create, cambiarEstado, cancelar };

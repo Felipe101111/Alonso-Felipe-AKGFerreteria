@@ -7,6 +7,10 @@ const errorHandler = (err, req, res, next) => {
     return errorResponse(res, err.message, err.statusCode);
   }
 
+  if (err.type === "entity.parse.failed") {
+    return errorResponse(res, Messages.INVALID_DATA, 400);
+  }
+
   console.error(err);
   return errorResponse(res, Messages.INTERNAL_SERVER_ERROR, 500);
 };

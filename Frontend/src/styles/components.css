@@ -247,6 +247,7 @@
 
 .product-card__title {
   font-size: 0.95rem;
+  color: #000;
 }
 
 .product-card__price {

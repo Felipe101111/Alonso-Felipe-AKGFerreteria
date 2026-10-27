@@ -136,6 +136,8 @@ const AdminPanel = () => {
       await pedidoService.cambiarEstado(pedido.id, nuevoEstado);
       showToast(`Pedido #${pedido.id} actualizado a "${nuevoEstado}".`, "success");
       cargarPedidos();
+      // El stock puede haberse restituido (pedido cancelado), se refleja en la tabla de productos.
+      cargarProductos();
     } catch (error) {
       showToast(error.message, "error");
     }
@@ -238,6 +240,8 @@ const AdminPanel = () => {
             <thead>
               <tr>
                 <th scope="col">Pedido</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Productos</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Total</th>
                 <th scope="col">Estado</th>
@@ -248,6 +252,16 @@ const AdminPanel = () => {
               {pedidos.map((pedido) => (
                 <tr key={pedido.id}>
                   <td>#{pedido.id}</td>
+                  <td>{pedido.clienteNombre}</td>
+                  <td>
+                    <ul>
+                      {pedido.detalles?.map((detalle) => (
+                        <li key={detalle.id}>
+                          {detalle.cantidad} x {detalle.productoNombre}
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
                   <td>{formatDate(pedido.fecha)}</td>
                   <td>{formatPrice(pedido.total)}</td>
                   <td>

@@ -3,7 +3,7 @@ import successResponse from "../responses/successResponse.js";
 
 const getAll = (req, res, next) => {
   try {
-    const productos = productoService.getAll();
+    const productos = productoService.getAll(req.query);
     successResponse(res, productos);
   } catch (error) {
     next(error);

@@ -33,4 +33,21 @@ const remove = (id) => {
   return true;
 };
 
-export default { findAll, findById, create, update, remove };
+const findByNombre = (nombre) =>
+  productos.find((p) => p.nombre.trim().toLowerCase() === String(nombre).trim().toLowerCase());
+
+const findCategorias = () => Array.from(new Set(productos.map((p) => p.categoria).filter(Boolean)));
+
+// Catálogo inicial de ejemplo.
+[
+  ["Martillo carpintero", "Martillo de acero con mango de madera", 8500, 25, "Herramientas"],
+  ["Destornillador Phillips", "Destornillador punta Phillips PH2", 3200, 40, "Herramientas"],
+  ["Taladro percutor 650W", "Taladro eléctrico con maletín", 78000, 8, "Herramientas"],
+  ["Cable unipolar 2,5mm", "Rollo de 100 metros", 52000, 12, "Electricidad"],
+  ["Lámpara LED 12W", "Luz cálida E27", 2100, 60, "Electricidad"],
+  ["Pintura látex 20L", "Pintura blanca interior/exterior", 64000, 10, "Pinturas"],
+].forEach(([nombre, descripcion, precio, stock, categoria]) =>
+  create({ nombre, descripcion, precio, stock, categoria }),
+);
+
+export default { findAll, findById, findByNombre, findCategorias, create, update, remove };

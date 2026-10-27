@@ -1,11 +1,13 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 import "../styles/navbar.css";
 
 const linkClassName = ({ isActive }) => `navbar__link${isActive ? " navbar__link--active" : ""}`;
 
 const Navbar = () => {
   const { isAuthenticated, isAdmin, usuario, logout } = useAuth();
+  const { count } = useCart();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -35,6 +37,13 @@ const Navbar = () => {
               Contacto
             </a>
           </li>
+          {isAuthenticated && !isAdmin && (
+            <li>
+              <NavLink to="/carrito" className={linkClassName}>
+                Carrito ({count})
+              </NavLink>
+            </li>
+          )}
           {isAuthenticated && !isAdmin && (
             <li>
               <NavLink to="/mis-pedidos" className={linkClassName}>

@@ -9,6 +9,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import AdminPanel from "./pages/AdminPanel.jsx";
 import MisPedidos from "./pages/MisPedidos.jsx";
+import Carrito from "./pages/Carrito.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 const App = () => (
@@ -20,6 +21,14 @@ const App = () => (
       <Route path="/productos/:id" element={<ProductDetail />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Register />} />
+      <Route
+        path="/carrito"
+        element={
+          <ProtectedRoute>
+            <Carrito />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/mis-pedidos"
         element={

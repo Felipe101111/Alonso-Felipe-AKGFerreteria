@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import Badge from "../components/Badge";
+import Button from "../components/Button";
 import pedidoService from "../services/pedidoService";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
@@ -13,25 +14,30 @@ const MisPedidos = () => {
   const { usuario } = useAuth();
   const { showToast } = useToast();
 
-  useEffect(() => {
-    let activo = true;
-
-    const cargarPedidos = async () => {
-      try {
-        const data = await pedidoService.getByCliente(usuario?.id);
-        if (activo) setPedidos(data ?? []);
-      } catch (error) {
-        if (activo) showToast(error.message, "error");
-      } finally {
-        if (activo) setLoading(false);
-      }
-    };
-
-    cargarPedidos();
-    return () => {
-      activo = false;
-    };
+  const cargarPedidos = useCallback(async () => {
+    try {
+      const data = await pedidoService.getByCliente(usuario?.id);
+      setPedidos(data ?? []);
+    } catch (error) {
+      showToast(error.message, "error");
+    } finally {
+      setLoading(false);
+    }
   }, [usuario, showToast]);
+
+  useEffect(() => {
+    cargarPedidos();
+  }, [cargarPedidos]);
+
+  const handleCancelar = async (pedido) => {
+    try {
+      await pedidoService.cancelar(pedido.id);
+      showToast(`Pedido #${pedido.id} cancelado.`, "success");
+      cargarPedidos();
+    } catch (error) {
+      showToast(error.message, "error");
+    }
+  };
 
   if (loading) return <Loader label="Cargando tus pedidos..." />;
 
@@ -49,7 +55,19 @@ const MisPedidos = () => {
                 <Badge estado={pedido.estado} />
               </div>
               <p className="pedidos__item-fecha">{formatDate(pedido.fecha)}</p>
+              <ul>
+                {pedido.detalles?.map((detalle) => (
+                  <li key={detalle.id}>
+                    {detalle.cantidad} x {detalle.productoNombre} — {formatPrice(detalle.subtotal)}
+                  </li>
+                ))}
+              </ul>
               <p className="pedidos__item-total">Total: {formatPrice(pedido.total)}</p>
+              {pedido.estado === "pendiente" && (
+                <Button variant="danger" onClick={() => handleCancelar(pedido)}>
+                  Cancelar pedido
+                </Button>
+              )}
             </li>
           ))}
         </ul>
